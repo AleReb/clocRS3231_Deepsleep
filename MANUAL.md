@@ -30,7 +30,7 @@ El sistema lee de manera automática el voltaje de la batería cada vez que sale
 - El valor leído por el pin ADC (Atenuación de 11dB, 12-bits, Vref ~1100mV) se convierte mediante `esp_adc_cal`.
 - El resultado se imprime por puerto Serial para brindar un diagnóstico integral sin interrumpir el funcionamiento continuo.
 
-## 3. Pino de Interrupción (Wake-up)
+## 3. Pin de Interrupción (Wake-up)
 
 **IMPORTANTE para ESP32-C3**: El despertar desde Deep Sleep utilizando un pin externo solo funciona si ese pin tiene capacidades RTC (generalmente GPIO0 a GPIO5).
 Si modificas la placa base, debes comprobar qué pines están conectados al dominio del RTC.
@@ -45,7 +45,7 @@ static const int RTC_INT_PIN = 5; // Cambiar según sea necesario
 3. **Causa del Reinicio**: Identificación en consola (`Power-on`, `Timer` o `GPIO`).
 4. **Validación del RTC / Borrado de Banderas**: Si el GPIO de interrupción fue disparado anteriormente porque la hora coincidía con una Alarma, el sistema borra esas banderas dentro del DS3231.
 5. **Cálculo y Reprogramación**: Se reprograman las alarmas activas (`enableAlarmX == true`) calculando su próxima ocurrencia válida (hoy, o al día siguiente si la hora ya pasó).
-6. **Reposo Profundo (Deep Sleep)**: El microcontrolador desactiva los periféricos principales y su CPU. El consumo basal drásticamente disminuye y el DS3231 continúa en ejecución gracias a su botón tipo moneda. Cuando ocurra una Alarma el SQW caerá a `LOW` y repetirá el proceso.
+6. **Reposo Profundo (Deep Sleep)**: El microcontrolador desactiva los periféricos principales y su CPU. El consumo basal drásticamente disminuye y el DS3231 continúa en ejecución gracias a su bateria tipo moneda. Cuando ocurra una Alarma el SQW caerá a `LOW` y repetirá el proceso.
 
 ## 5. Monitoreo y Diagnóstico
 
